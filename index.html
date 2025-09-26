@@ -7,29 +7,32 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
   </head>
   <body>
+    <h2>Volcano Locations</h2>
     <div id="vis"></div>
 
     <script type="text/javascript">
       const spec = {
         $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-        width: 800,
-        height: 400,
+        width: 900,
+        height: 450,
         projection: { type: "equalEarth" },
 
         layer: [
           {
+            // Background map: countries
             data: {
-              url: "https://vega.github.io/vega-datasets/data/world-110m.json",
+              url: "https://github.com/JesseHodgson/FIT3179/blob/main/volcanoes%20around%20the%20world%20in%202021.csv",
               format: { type: "topojson", feature: "countries" }
             },
             mark: { type: "geoshape", fill: "lightgray", stroke: "white" }
           },
           {
+            // Volcano points
             data: {
-              url: "https://github.com/JesseHodgson/FIT3179/blob/main/volcanoes%20around%20the%20world%20in%202021.csv",
-              format: { type: "json" }
+              url: "volcanoes.csv",    // <-- your CSV file in the repo
+              format: { type: "csv" }
             },
-            mark: { type: "circle", color: "red", size: 50 },
+            mark: { type: "circle", color: "red", size: 60 },
             encoding: {
               longitude: { field: "longitude", type: "quantitative" },
               latitude: { field: "latitude", type: "quantitative" },
